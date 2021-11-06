@@ -36,19 +36,27 @@
 
 Убедился, что выполнен шаг с установкой VirtualBox для Windows (Установлен в папку C:\Soft):
 ![img_16.png](img_16.png)
+
 Удалил имеющийся vagrant:
 ![img_7.png](img_7.png)
+
 Установил его заново по инструкции:
 ![img_10.png](img_10.png)
+
 Выполнил настройку и инициализацию vagrant:
 ![img_11.png](img_11.png)
+
 Заменил содержимое Vagrantfile:
+
 ![img_12.png](img_12.png)
+
 Запускаю vagrant и получаю прежние ошибки:
 ![img_13.png](img_13.png)
+
 Найти решение по подсказкам в сообщениях ошибок также не получается:
 ![img_14.png](img_14.png)
 ![img_15.png](img_15.png)
+
 Подозреваю, что проблема с VirtualBox, безуспешно пытался решить ее:
 https://stackoverflow.com/questions/60350358/how-do-i-resolve-the-character-device-dev-vboxdrv-does-not-exist-error-in-ubu
 ![img_17.png](img_17.png)
