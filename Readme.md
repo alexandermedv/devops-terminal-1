@@ -64,3 +64,8 @@ https://stackoverflow.com/questions/60350358/how-do-i-resolve-the-character-devi
 ![img_19.png](img_19.png)
 ![img_20.png](img_20.png)
 ![img_21.png](img_21.png)
+------
+После переустановки VirtualBox в директорию по умолчанию результат прежний:
+![img_22.png](img_22.png)
+Версия Linux:
+![img_24.png](img_24.png)
