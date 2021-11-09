@@ -69,3 +69,14 @@ https://stackoverflow.com/questions/60350358/how-do-i-resolve-the-character-devi
 ![img_22.png](img_22.png)
 Версия Linux:
 ![img_24.png](img_24.png)
+---
+Системная переменная VBOXINSTALLPATH:
+
+У меня не было переменной VBOXINSTALLPATH, но была похожая VBOX_MSI_INSTALL_PATH со значением C:\Program Files\Oracle\VirtualBox\
+![img_25.png](img_25.png)
+Создал также VBOXINSTALLPATH с тем же значением:
+![img_26.png](img_26.png)
+Параметр secure boot в BIOS я отключил несколько дней назад в ходе своих попыток:
+![img_27.png](img_27.png)
+Результат запуска vagrant up не изменился:
+![img_28.png](img_28.png)
