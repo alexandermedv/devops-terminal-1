@@ -80,3 +80,72 @@ https://stackoverflow.com/questions/60350358/how-do-i-resolve-the-character-devi
 ![img_27.png](img_27.png)
 Результат запуска vagrant up не изменился:
 ![img_28.png](img_28.png)
+
+---
+Установил vagrant без WSL. Пришлось даунгрейдить VirtualBox, о версии 6.1.26, т.к. 6.1.28 видимо еще сырая, у меня в ней даже не запустилась виртуальная машина. После этого получилось:
+
+5. Графический интерфейс VirtualBox:
+![img_29.png](img_29.png)
+   По умолчанию выделены следующие ресурсы:
+   ОЗУ 1024 МБ,
+   Процессоры: 2
+   Память: 64 ГБ
+   Видеопамять: 4МБ
+   
+6. Для того, чтобы изменить имя виртуальной машины и удвоить количество памяти и процессоров, Vagrantfile будет выглядеть так:
+ Vagrant.configure("2") do |config|
+ 	config.vm.box = "bento/ubuntu-20.04"
+ 	config.vm.provider "virtualbox" do |v|
+      v.name = "my_vm"
+    end
+    config.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+      v.cpus = 4
+    end
+ end
+   
+Результат:
+![img_30.png](img_30.png)
+
+7. Зашел в виртуальную машину через vagrant ssh. Дальнейшие действия делаем в ней. Например, man bash:
+![img_31.png](img_31.png)
+   
+8. Заходим в man bash.
+С помощью команды /history, переключаясь между результатами клавишей N, ищем команду для изменения длины журнала history:
+   ![img_32.png](img_32.png)
+   
+   Нужная нам строка:  The text of the last  HISTSIZE  commands (default  500)  is  saved.
+Нужная переменная HISTSIZE, номер нужной строки: 2602.
+   Директива ignoreboth удаляет из истории повторяющиеся записи.
+   
+9. Скобки {} обозначают список команд, который будет исполнен в текущем терминале shell. Список должен заканчиваться точкой с запятой. Описано в разделе Compound Commands в строке 230.
+
+10. Команда touch {0..100000} успешно выполняется.
+Команда touch {0..300000} завершается ошибкой:
+    -bash: /usr/bin/touch: Argument list too long
+    
+Опытным путем получаем, что максимальная длина списка аргументов для этой команды равна 147058.
+11. Ищем по ключу в мануале bash и находим ответ в строке 240:
+
+[[ expression ]]
+              Return a status of 0 or 1 depending on the evaluation of the conditional expression expression.  Expressions are composed of the primaries
+              described below under CONDITIONAL EXPRESSIONS.  Word splitting and pathname expansion are not performed on the words between  the  [[  and
+              ]]; tilde expansion, parameter and variable expansion, arithmetic expansion, command substitution, process substitution, and quote removal
+              are performed.  Conditional operators such as -f must be unquoted to be recognized as primaries.
+              When used with [[, the < and > operators sort lexicographically using the current locale.
+
+А также в строке 1587:
+
+-d file
+              True if file exists and is a directory.
+
+Выражение [[ -d /tmp ]] проверяет существование директории /tmp и возвращает True, если существует.
+
+12. Похожий результат получился по команде 
+    alias bash=/tmp/new_path_directory/bash:
+    
+![img_33.png](img_33.png)
+
+13. Команда at используется для назначения одноразового задания на заданное время, а команда batch — для назначения одноразовых задач, которые должны выполняться, когда загрузка системы становится меньше порогового уровня.
+
+14. vagrant halt
